@@ -1,7 +1,6 @@
-
 import {
     addCompany,
-    addUserBooks,
+    addUserBooks, changeCompanyTitle,
     removeUserBook,
     UpdateUserBooks,
     upgradeUserToMackBook,
@@ -36,7 +35,7 @@ test('upgrade laptop to Macbook', () => {
 })
 
 test('add new books to user', () => {
-    let user: UserWithBooksType= {
+    let user: UserWithBooksType = {
         name: 'Some name',
         hair: 1,
         address: {
@@ -49,13 +48,13 @@ test('add new books to user', () => {
         books: ['YDNJS', 'CSS', 'TS'],
     }
 
-    const UserWithNewBook1= addUserBooks(user, ['rest', 'TS'])
+    const UserWithNewBook1 = addUserBooks(user, ['rest', 'TS'])
     expect(UserWithNewBook1.books[3]).toBe('rest')
     expect(UserWithNewBook1.books).not.toBe(user.books)
 })
 
 test('update list of books to user', () => {
-    let user: UserWithBooksType= {
+    let user: UserWithBooksType = {
         name: 'Some name',
         hair: 1,
         address: {
@@ -68,12 +67,12 @@ test('update list of books to user', () => {
         books: ['YDNJS', 'CSS', 'TS'],
     }
 
-    const UserWithNewBook1=UpdateUserBooks(user, 'TS', 'JS')
+    const UserWithNewBook1 = UpdateUserBooks(user, 'TS', 'JS')
     expect(UserWithNewBook1.books[2]).toBe('JS')
 })
 
 test('remove user book', () => {
-    let user: UserWithBooksType= {
+    let user: UserWithBooksType = {
         name: 'Some name',
         hair: 1,
         address: {
@@ -86,13 +85,13 @@ test('remove user book', () => {
         books: ['YDNJS', 'CSS', 'TS'],
     }
 
-    const removeBook1=removeUserBook(user, 'CSS')
+    const removeBook1 = removeUserBook(user, 'CSS')
     expect(removeBook1.books.length).toBe(2)
     expect(removeBook1.books[1]).toBe('TS')
 })
 
 test('add company', () => {
-    let user: UserWithCompanyType= {
+    let user: UserWithCompanyType = {
         name: 'Some name',
         hair: 1,
         address: {
@@ -109,8 +108,33 @@ test('add company', () => {
         ]
     }
 
-    const addCompany1=addCompany(user, 'New job 2')
+    const addCompany1 = addCompany(user, 'New job 2')
     expect(addCompany1.companies.length).toBe(3)
     expect(addCompany1.companies[2].id).toBe(3)
     expect(addCompany1.companies[2].title).toBe('New job 2')
+})
+
+test('Change company title', () => {
+    let user: UserWithCompanyType = {
+        name: 'Some name',
+        hair: 1,
+        address: {
+            city: 'Kukueva',
+            house: 12,
+        },
+        laptop: {
+            title: 'no name laptop'
+        },
+        books: ['YDNJS', 'CSS', 'TS'],
+        companies: [
+            {id: 1, title: 'RSM'},
+            {id: 2, title: 'New job 1'},
+        ]
+    }
+
+    const copyUser = changeCompanyTitle(user, 1, 'Cleaning serves')
+    expect(copyUser).not.toBe(user)
+    expect(copyUser.address).toBe(user.address)
+    expect(copyUser.companies[0].title).toBe('Cleaning serves')
+    console.log(copyUser)
 })

@@ -44,3 +44,7 @@ export const removeUserBook = (user: UserWithBooksType, book:string ) => {
 export const addCompany = (user: UserWithCompanyType, companyTitle:string ) => {
     return {...user, companies: [...user.companies, {id: user.companies.length+1, title: companyTitle} ]}
 }
+
+export const changeCompanyTitle = (user: UserWithCompanyType,id:number, companyTitle:string ) => {
+    return {...user, companies: user.companies.map( c => c.id === id ? {...c, title: companyTitle}: c)}
+}
