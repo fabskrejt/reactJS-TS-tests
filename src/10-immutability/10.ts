@@ -27,3 +27,7 @@ export const upgradeUserToMackBook = (user: UserWithLaptopType, laptop:string) =
 export const addUserBooks = (user: UserWithBooksType, books:BooksType) => {
     return {...user, books: [...user.books, ...books] }
 }
+
+export const UpdateUserBooks = (user: UserWithBooksType, userBook:string, newUserBook:string ) => {
+    return {...user, books: [...user.books.map( b => b === userBook ? newUserBook: b)] }
+}
