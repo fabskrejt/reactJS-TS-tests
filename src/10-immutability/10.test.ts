@@ -1,10 +1,11 @@
 
 import {
+    addCompany,
     addUserBooks,
     removeUserBook,
     UpdateUserBooks,
     upgradeUserToMackBook,
-    UserWithBooksType,
+    UserWithBooksType, UserWithCompanyType,
     UserWithLaptopType
 } from "./10";
 
@@ -88,4 +89,28 @@ test('remove user book', () => {
     const removeBook1=removeUserBook(user, 'CSS')
     expect(removeBook1.books.length).toBe(2)
     expect(removeBook1.books[1]).toBe('TS')
+})
+
+test('add company', () => {
+    let user: UserWithCompanyType= {
+        name: 'Some name',
+        hair: 1,
+        address: {
+            city: 'Kukueva',
+            house: 12,
+        },
+        laptop: {
+            title: 'no name laptop'
+        },
+        books: ['YDNJS', 'CSS', 'TS'],
+        companies: [
+            {id: 1, title: 'RSM'},
+            {id: 2, title: 'New job 1'},
+        ]
+    }
+
+    const addCompany1=addCompany(user, 'New job 2')
+    expect(addCompany1.companies.length).toBe(3)
+    expect(addCompany1.companies[2].id).toBe(3)
+    expect(addCompany1.companies[2].title).toBe('New job 2')
 })

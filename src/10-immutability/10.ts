@@ -20,6 +20,11 @@ export type BooksType = Array<string>
 export type UserWithBooksType = UserWithLaptopType & {
  books: BooksType
 }
+
+export type UserWithCompanyType = UserWithBooksType & {
+    companies: Array<{id:number, title: string}>
+}
+
 export const upgradeUserToMackBook = (user: UserWithLaptopType, laptop:string) => {
     return {...user, laptop: {...user.laptop, title:laptop} }
 }
@@ -34,4 +39,8 @@ export const UpdateUserBooks = (user: UserWithBooksType, userBook:string, newUse
 
 export const removeUserBook = (user: UserWithBooksType, book:string ) => {
     return {...user, books: user.books.filter( b => b !== book ) }
+}
+
+export const addCompany = (user: UserWithCompanyType, companyTitle:string ) => {
+    return {...user, companies: [...user.companies, {id: user.companies.length+1, title: companyTitle} ]}
 }
