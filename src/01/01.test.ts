@@ -4,20 +4,25 @@ let a: number;
 let b: number;
 let c: number;
 
-beforeEach(() =>{
+beforeEach(() => {
     a = 1;
     b = 4;
     c = 7;
 })
 
-test('sum should be correct', () =>{
+test('sum should be correct', () => {
     const result1 = sum(a, b)
     const result2 = sum(b, c)
     const result3 = sum(a, c)
+    a = 8
+    const result4 = sum(a, b)
 
+    expect(result4).toBe(12)
     expect(result1).toBe(5)
     expect(result2).toBe(11)
     expect(result3).toBe(8)
+
+
 })
 
 test('multiply should be correct', () => {
