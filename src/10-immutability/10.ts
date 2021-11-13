@@ -31,3 +31,7 @@ export const addUserBooks = (user: UserWithBooksType, books:BooksType) => {
 export const UpdateUserBooks = (user: UserWithBooksType, userBook:string, newUserBook:string ) => {
     return {...user, books: user.books.map( b => b === userBook ? newUserBook: b) }
 }
+
+export const removeUserBook = (user: UserWithBooksType, book:string ) => {
+    return {...user, books: user.books.filter( b => b !== book ) }
+}

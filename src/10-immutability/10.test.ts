@@ -1,5 +1,12 @@
 
-import {addUserBooks, UpdateUserBooks, upgradeUserToMackBook, UserWithBooksType, UserWithLaptopType} from "./10";
+import {
+    addUserBooks,
+    removeUserBook,
+    UpdateUserBooks,
+    upgradeUserToMackBook,
+    UserWithBooksType,
+    UserWithLaptopType
+} from "./10";
 
 
 test('upgrade laptop to Macbook', () => {
@@ -62,4 +69,23 @@ test('update list of books to user', () => {
 
     const UserWithNewBook1=UpdateUserBooks(user, 'TS', 'JS')
     expect(UserWithNewBook1.books[2]).toBe('JS')
+})
+
+test('remove user book', () => {
+    let user: UserWithBooksType= {
+        name: 'Some name',
+        hair: 1,
+        address: {
+            city: 'Kukueva',
+            house: 12,
+        },
+        laptop: {
+            title: 'no name laptop'
+        },
+        books: ['YDNJS', 'CSS', 'TS'],
+    }
+
+    const removeBook1=removeUserBook(user, 'CSS')
+    expect(removeBook1.books.length).toBe(2)
+    expect(removeBook1.books[1]).toBe('TS')
 })
