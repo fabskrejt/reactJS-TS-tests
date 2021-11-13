@@ -20,6 +20,7 @@ test('upgrade laptop to Macbook', () => {
     const userWithMac3 = {...user}
 
     expect(userWithMac1.laptop.title).toBe('MacBook')
+    expect(user.laptop.title).toBe('no name laptop')
     expect(userWithMac1.laptop.title).not.toBe(user.laptop.title)
     expect(userWithMac2).not.toBe(user)
     expect(user).not.toBe(userWithMac3)
